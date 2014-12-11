@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%  block morehead %}
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+    <link href="{% static "pacific/static.css" %}" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel="stylesheet"/>
+<style> #map {text-align:center; margin: 0,auto;width:800px;height:800px;}</style>​
+{%  endblock %}
+
+
+{% block content %}
+    <div class="col-md-2 column">
+    </div>
+    <div class="col-md-8 column">
+    <h2 style="color:yellow">{{ battle.name }}</h2>
+        <div id='map'></div>
+    </div>
+    <div class="col-md-2 column">
+    </div>
+{% endblock %}
+
+
+{%  block scripts %}
+<script>
+    var map = L.mapbox.map('map', 'hickenjc.k5ejiog2');
+
+   map.fitBounds([[{{ battle.geom.extent.3 }}, {{ battle.geom.extent.0 }}],
+                  [{{ battle.geom.extent.1 }}, {{ battle.geom.extent.2 }}]]);
+   map.setMaxBounds([[{{ battle.geom.extent.3 }}, {{ battle.geom.extent.0 }}],
+                  [{{ battle.geom.extent.1 }}, {{ battle.geom.extent.2 }}]]);
+
+
+   var needs_photos_icon = {
+            radius: 6,
+            fillColor: "red",
+            color: "black",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7
+    };
+
+   $.getJSON('/api/v1/points', function (data) {
+      L.geoJson(data, {pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, needs_photos_icon);
+        },
+        onEachFeature: function (feature, layer) {
+            (function(layer, properties) {
+                layer.on("click", function (e) {
+
+   var popup = L.popup()
+         .setLatLng(e.latlng)
+         .setContent('<div><h2>' +  properties.name + '</h2><p>' + properties.desc + '</p></div>')
+         .openOn(map);
+                });
+
+                })(layer, feature.properties);
+        },
+        style: needs_photos_icon}).addTo(map);
+
+
+    });
+
+
+</script>
+{% endblock %}

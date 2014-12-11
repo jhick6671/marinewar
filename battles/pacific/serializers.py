@@ -7,3 +7,9 @@ class BattleSerializer(geoserializers.GeoFeatureModelSerializer):
         model = models.Battle
         geo_field = 'geom'
         fields = ('id', 'name')
+
+class PISerializer(geoserializers.GeoFeatureModelSerializer):
+    class Meta:
+        model = models.PointInterest
+        geo_field = 'geom'
+        fields = ('id', 'name', 'desc')

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block morehead %}
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+    <link href="{% static "pacific/static.css" %}" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel="stylesheet"/>
+<style> #map {position:absolute; top:50px; right:10px;left:6px;bottom:0;width:750px;height:1000px;}</style>​
+{%  endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<h3 style="color: yellow">
+				In World War II, the Marines played a central role in the Pacific War. The battles of Guadalcanal, Tarawa, Guam, Saipan, Peleliu, Iwo Jima, and Okinawa saw fierce fighting between Marines and the Imperial Japanese Army.
+			</h3>
+			<div class="btn-group">
+				 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >Action <span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li>
+						<a href="{% url "pacific:battle" pk=1 %}">Guadalcanal</a>
+					</li>
+                    <li>
+						<a href="{% url "pacific:battle" pk=6 %}">Tarawa</a>
+					</li>
+					<li>
+						<a href="{% url "pacific:battle" pk=7 %}">Saipan</a>
+					</li>
+					<li>
+						<a href="{% url "pacific:battle" pk=5 %}">Peleliu</a>
+					</li>
+                    <li>
+						<a href="{% url "pacific:battle" pk=4 %}">Iwo Jima</a>
+					</li>
+                    <li>
+						<a href="{% url "pacific:battle" pk=2 %}">Guam</a>
+					</li>
+                    <li>
+						<a href="{% url "pacific:battle" pk=3 %}">Okinawa</a>
+					</li>
+                    </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%  endblock %}
+
+{%  block scripts %}
+<script>
+    var map = L.mapbox.map('map', 'hickenjc.k5ejiog2');
+</script>
+{% endblock %}

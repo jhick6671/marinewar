@@ -3,4 +3,5 @@ from battles.pacific import models
 
 # Register your models here.
 admin.site.register(models.Battle)
+admin.site.register(models.PointInterest)
 

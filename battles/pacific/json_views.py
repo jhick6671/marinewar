@@ -16,6 +16,13 @@ class BattleFilter(django_filters.FilterSet):
         model = models.Battle
         fields = ['id', 'name']
 
+class PIFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
+
+    class Meta:
+        model = models.PointInterest
+        fields = ['id', 'name', 'desc']
+
 class BattleCollection(generics.ListAPIView):
     """
     API endpoint that allows users to be viewed or edited.
@@ -23,4 +30,12 @@ class BattleCollection(generics.ListAPIView):
     queryset = models.Battle.objects.all()
     serializer_class = serializers.BattleSerializer
     filter_class = BattleFilter
+
+class PICollection(generics.ListAPIView):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = models.PointInterest.objects.all()
+    serializer_class = serializers.PISerializer
+    filter_class = PIFilter
 

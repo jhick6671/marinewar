@@ -1,0 +1,41 @@
+
+.navbar-collapse {
+    background-color: red;
+    color: yellow;
+}
+
+body {
+    background-color: red;
+}
+
+.thumbnail {
+    background-color: red;
+    border-color: red;
+}
+.btn-primary {
+    background-color: yellow;
+    color: red;
+    border-color: yellow;
+}
+
+.navbar-default {
+    border-color: yellow;
+}
+
+li {
+    background-color: yellow;
+}
+
+a {
+    color: red;
+}
+
+.navbar-brand {
+    background-color: yellow;
+}
+
+.btn-default {
+    background-color: yellow;
+    border-color: yellow;
+    color: red;
+}
